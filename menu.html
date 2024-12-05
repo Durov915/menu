@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veg Restaurant Menu</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 120px; /* To prevent footer overlap */
+            height: 100%;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 15px; /* Reduced padding */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header img {
+            max-width: 60px; /* Reduced logo size */
+            margin-bottom: 8px; /* Adjusted margin */
+            border-radius: 50%;
+        }
+
+        header h1 {
+            font-size: 1.6em; /* Smaller font size */
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* Table Selector */
+        #table-selector {
+            background-color: #ecf0f1;
+            padding: 15px 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #table-selector label {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-right: 10px;
+        }
+
+        #table-selector select {
+            padding: 8px 15px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        /* Menu Section */
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Menu Item Styles */
+        .item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+            text-align: center;
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+        }
+
+        .item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .item-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #34495e;
+            margin-top: 15px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .quantity-controls button {
+            padding: 8px 12px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            background-color: #2980b9;
+            color: white;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-controls button:hover {
+            background-color: #21618c;
+        }
+
+        .quantity-controls span {
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+
+        /* Cart Button */
+        button.cart-button {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button.cart-button:hover {
+            background: #1e8449;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 1em;
+            margin: 0;
+        }
+
+        footer a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer .made-by {
+            font-size: 0.9em;
+            color: #bbb;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.4em; /* Further reduced for mobile */
+            }
+
+            header img {
+                max-width: 50px; /* Smaller logo on mobile */
+            }
+
+            .item img {
+                height: 250px;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr;
+            }
+
+            #table-selector {
+                padding: 10px;
+            }
+
+            button.cart-button {
+                padding: 8px 16px;
+                font-size: 1em;
+            }
+
+            footer p {
+                font-size: 0.9em;
+            }
+
+            footer .made-by {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="logo.jpg" alt="Restaurant Logo">
+        <h1>Menu</h1>
+    </header>
+
+    <!-- Table Selector -->
+    <div id="table-selector">
+        <label for="table-number">Select Table:</label>
+        <select id="table-number">
+            <option value="">--Select Table--</option>
+            <option value="Table 1">Table 1</option>
+            <option value="Table 2">Table 2</option>
+            <option value="Table 3">Table 3</option>
+            <option value="Table 4">Table 4</option>
+        </select>
+    </div>
+    <div class="menu-container">
+        <!-- Paneer Butter Masala -->
+        <div class="item">
+            <img src="https://thecurrymommy.com/wp-content/uploads/2021/09/butter-paneer-masala-one-pot.jpg" alt="Paneer Butter Masala">
+            <span class="item-name">Paneer Butter Masala</span>
+            <div class="quantity-controls">
+                <button onclick="changeQuantity(this, -1)">-</button>
+                <span>0</span>
+                <button onclick="changeQuantity(this, 1)">+</button>
+                <button class="cart-button" onclick="addToCart(this)">Order</button>
+            </div>
+        </div>
+
+        <!-- Dal Tadka -->
+        <div class="item">
+            <img src="https://i0.wp.com/aartimadan.com/wp-content/uploads/2020/12/Dal-Tadka.jpg" alt="Dal Tadka">
+            <span class="item-name">Dal Tadka</span>
+            <div class="quantity-controls">
+                <button onclick="changeQuantity(this, -1)">-</button>
+                <span>0</span>
+                <button onclick="changeQuantity(this, 1)">+</button>
+                <button class="cart-button" onclick="addToCart(this)">Order</button>
+            </div>
+        </div>
+
+        <!-- Aloo Gobi -->
+        <div class="item">
+            <img src="https://www.seriouseats.com/thmb/gTVjyFHq-N3iyv08113cBQWCTv8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20220303-aloo-gobi-vicky-wasik-35-c9afccd574534761886e5964f34586e1.jpg" alt="Aloo Gobi">
+            <span class="item-name">Aloo Gobi</span>
+            <div class="quantity-controls">
+                <button onclick="changeQuantity(this, -1)">-</button>
+                <span>0</span>
+                <button onclick="changeQuantity(this, 1)">+</button>
+                <button class="cart-button" onclick="addToCart(this)">Order</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 UK Bite Restaurant. All Rights Reserved.</p>
+        <p class="made-by">Made by <a href="#" target="_blank">Dhruv Thakkar</a></p>
+    </footer>
+
+    <script>
+        // Update quantity
+        function changeQuantity(button, change) {
+            const quantitySpan = button.parentElement.querySelector('span');
+            let currentQuantity = parseInt(quantitySpan.textContent, 10);
+            currentQuantity += change;
+            if (currentQuantity < 0) currentQuantity = 0;
+            quantitySpan.textContent = currentQuantity;
+        }
+
+        // Order and redirect to WhatsApp
+        function addToCart(button) {
+            const tableNumber = document.getElementById('table-number').value;
+            if (!tableNumber) {
+                alert('Please select a table before placing an order.');
+                return;
+            }
+
+            const itemElement = button.parentElement.parentElement.querySelector('.item-name');
+            const quantitySpan = button.parentElement.querySelector('span');
+            const itemName = itemElement.textContent;
+            const quantity = parseInt(quantitySpan.textContent, 10);
+
+            if (quantity > 0) {
+                const whatsappNumber = '+918780452003';
+                const message = `${tableNumber}\nOrder: ${itemName} - Quantity: ${quantity}`;
+                const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                location.href = whatsappLink;
+            } else {
+                alert('Please select a quantity greater than 0.');
+            }
+        }
+    </script>
+</body>
+
+</html>
